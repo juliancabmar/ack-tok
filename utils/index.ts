@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { stringify } from 'querystring';
 
-export const createOrGetUser = async (response: any) => {
+export const createOrGetUser = async (response: any, addUser: any) => {
   const decoded: {name: stringify, picture: string, sub: string } = jwt_decode(response.credential);
 
   const { name, picture, sub } = decoded;
@@ -13,6 +13,8 @@ export const createOrGetUser = async (response: any) => {
     userName: name,
     image: picture
   };
+
+  addUser(user);
 
   await axios.post('http://localhost:3000/api/auth', user);
 };
