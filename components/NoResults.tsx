@@ -1,15 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { NextPage } from 'next';
+import React from 'react'
+import { BiCommentX } from 'react-icons/bi';
+import { MdOutlineVideocamOff } from 'react-icons/md';
 
 interface IProps{
   text: string;
 }
 
 
-const NoResults: NextPage<IProps> = ({ text }) => {
+const NoResults = ({ text }: IProps) => {
   return (
-    <div>
-      
+    <div className='flex flex-col justify-center items-center h-full w-full'>
+      { text == 'No comments yet.' ? <BiCommentX className='text-8xl'/> : <MdOutlineVideocamOff className='text-8xl'/> }
+      <p className='text-2xl text-center'>{text}</p>
     </div>
   )
 }
