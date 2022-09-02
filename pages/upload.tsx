@@ -45,7 +45,6 @@ const Upload = () => {
     
 
     if (caption && videoAsset?._id && category) {
-      console.log("Tested");
       setSavingPost(true);
 
       const document = {
