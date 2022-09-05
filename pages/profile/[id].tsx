@@ -10,14 +10,32 @@ import { BASE_URL } from '../../utils';
 
 interface IProps {
   data: {
-    user: IUser,
-    userVideos: Video[],
-    userLikedVideos: Video[]
-  }
+    user: IUser;
+    userVideos: Video[];
+    userLikedVideos: Video[];
+  };
 }
 
 const Profile = ({ data }: IProps) => {
+  const [showUserVideos, setShowUserVideos] = useState<Boolean>(true);
+  const [videosList, setVideosList] = useState<Video[]>([]);
+
   const { user, userVideos, userLikedVideos } = data;
+  const videos = showUserVideos ? 'border-b-2 border-black' : 'text-gray-400';
+  const liked = !showUserVideos ? 'border-b-2 border-black' : 'text-gray-400';
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      if (showUserVideos) {
+        setVideosList(userVideos);
+      } else {
+        console.log(userLikedVideos);
+        setVideosList(userLikedVideos);
+      }
+    };
+
+    fetchVideos();
+  }, [showUserVideos, userLikedVideos, userVideos]);
 
   return (
     <div className='w-full'>
@@ -32,15 +50,38 @@ const Profile = ({ data }: IProps) => {
             layout='responsive'
           />
         </div>
-        <div className='hidden xl:block'>
-          <p className='flex gap-1 items-center text-md font-bold text-primary lowercase'>
+        <div className='flex flex-col justify-center'>
+          <p className='md:text-2xl tracking-wider flex gap-1 items-center justify-center text-md font-bold text-primary lowercase'>
             {user.userName}
             <GoVerified className='text-blue-400' />
           </p>
-          <p className='capitalize text-gray-400 text-xs'>
+          <p className='capitalize text-gray-400 text-xs md:text-xl'>
             {user.userName}
           </p>
         </div>
+      </div>
+      <div className='flex gap-10 mb-10 mt-10 border-b-2 border-gray-200 bg-white w-full'>
+        <p
+          className={`text-xl font-semibold cursor-pointer mt-2 ${videos}`}
+          onClick={() => setShowUserVideos(true)}>
+            Videos
+        </p>
+        <p
+          className={`text-xl font-semibold cursor-pointer mt-2 ${liked}`}
+          onClick={() => setShowUserVideos(false)}>
+            Liked
+        </p>
+      </div>
+      <div className='flex gap-6 flex-wrap md:justify-start'>
+        {videosList.length > 0 ? (
+          videosList.map((post: Video, idx: number) => (
+            <VideoCard key={idx} post={post} />
+          ))
+        ) : (
+          <NoResults
+            text={`No ${showUserVideos ? '' : 'Liked'} Videos Yet`}
+          />
+        )}
       </div>
     </div>
   )

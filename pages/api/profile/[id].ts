@@ -13,8 +13,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const user = await client.fetch(query);
     const userVideos = await client.fetch(userVideoQuery);
-    const userLikedVideo = await client.fetch(userLikedVideoQuery);
+    const userLikedVideos = await client.fetch(userLikedVideoQuery);
 
-    res.status(200).json({ user: user[0], userVideos, userLikedVideo });
+    res.status(200).json({ user: user[0], userVideos, userLikedVideos });
   }
 }
