@@ -12,12 +12,19 @@ import Logo from '../utils/acktok-logo.png'
 import { createOrGetUser } from '../utils/index';
 import useAuthStore from '../store/authStore';
 
-const handleSearch = () => {};
-
 const Navbar = () => {
   const { userProfile, addUser, removeUser } = useAuthStore();
-
   const [searchValue, setSearchValue] = useState('');
+  const router = useRouter();
+
+
+  const handleSearch = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+  
+    if(searchValue) {
+      router.push(`/search/${searchValue}`);
+    }
+  };
 
   return (
     <div className='w-full flex justify-between items-center border-b-2 border-gray-200 py-2 px-4'>
@@ -38,8 +45,8 @@ const Navbar = () => {
         >
           <input
             type="text"
-            value=''
-            onChange={() => {}}
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
             placeholder='Search accounts and videos'
             className='bg-primary p-3 md:text-md font-medium border-2 border-gray-100 focus:outline-none focus:border-2 focus:border-gray-300 w-[300px] md:w-[350px] rounded-full md:top-0'
           />
