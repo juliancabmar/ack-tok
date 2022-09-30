@@ -8,7 +8,8 @@ const nextConfig = {
   images: {
     domains: [
       'upload.wikimedia.org',
-      'lh3.googleusercontent.com'
+      'lh3.googleusercontent.com',
+      'images.unsplash.com'
     ]
   }
 }
