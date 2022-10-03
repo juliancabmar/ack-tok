@@ -87,7 +87,7 @@ const Detail = ({ postDetails }: IProps) => {
             className='cursor-pointer'
             onClick={() => router.back()}
           >
-            <MdOutlineCancel className='text-white text-[35px]' />
+            <MdOutlineCancel className='text-[#F51997] text-[35px]' />
           </p>
         </div>
         <div className='relative'>
@@ -104,18 +104,18 @@ const Detail = ({ postDetails }: IProps) => {
           <div className='absolute top-[45%] left-[45%] cursor-pointer'>
             {!playing && (
               <button onClick={onVideoClick}>
-                <BsFillPlayFill className='text-white text-6xl lg:text-8xl' />
+                <BsFillPlayFill className='text-[#F51997] text-6xl lg:text-8xl' />
               </button>
             )}
           </div>
           <div className='absolute bottom-5 lg:bottom-10 right-5 lg:right-10 cursor-pointer'>
             {isVideoMuted ? (
               <button onClick={() => setIsVideoMuted(false)}>
-                <HiVolumeOff className='text-white text-2xl lg:text-4xl' />
+                <HiVolumeOff className='text-[#F51997] text-2xl lg:text-4xl' />
               </button>
               ) : (
               <button onClick={() => setIsVideoMuted(true)}>
-                <HiVolumeUp className='text-white text-2xl lg:text-4xl' />
+                <HiVolumeUp className='text-[#F51997] text-2xl lg:text-4xl' />
               </button>
             )}
           </div>
